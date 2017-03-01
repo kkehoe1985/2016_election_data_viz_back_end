@@ -79,6 +79,8 @@ def updatePredictions():
 	import pandas as pd
 	global rf_classifier_model
 
+	print "imported pandas"
+
 	initial_data = pd.DataFrame(pd.read_json('https://raw.githubusercontent.com/kkehoe1985/ga_data_science_final_project/master/initialization_data.json'))
 	def unpack(df, column, fillna=None):
 	    ret = None
