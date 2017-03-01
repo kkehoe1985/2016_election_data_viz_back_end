@@ -1,1 +1,1 @@
-worker: python flask_backend_v2.py
+web: python flask_backend_v2.py
