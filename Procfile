@@ -1,1 +1,1 @@
-web: python flask_backend_v2.py runserver 0.0.0.0:5000
+web: python flask_backend_v2.py
