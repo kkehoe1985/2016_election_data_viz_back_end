@@ -42,27 +42,13 @@ def createModel():
 
 	global rf_classifier_model
 	global X
-
-	initial_data = pd.DataFrame(pd.read_json('https://raw.githubusercontent.com/kkehoe1985/ga_data_science_final_project/master/initialization_data.json'))
-	def unpack(df, column, fillna=None):
-	    ret = None
-	    if fillna is None:
-	        ret = pd.concat([df, pd.DataFrame((d for idx, d in df[column].iteritems()))], axis=1)
-	        del ret[column]
-	    else:
-	        ret = pd.concat([df, pd.DataFrame((d for idx, d in df[column].iteritems())).fillna(fillna)], axis=1)
-	        del ret[column]
-	    return ret
-
-	initial_data = unpack(initial_data, 'properties', 0)
-
-	drop_columns = ['Democrat', 'Republican', 'state', 'geo_name', 'D', 'R', 'party_winner', 'arcs', 'c', 's', 'r', 'id', 'type']
-
-	X = initial_data.drop(drop_columns, axis=1) 
+    
+	initial_data = pd.read_csv('https://raw.githubusercontent.com/kkehoe1985/ga_data_science_final_project/master/unpacked.csv')
+	X = initial_data.drop('Democrat', axis=1) 
 	y = initial_data['Democrat']
 
 	# predict the response for new observations
-	rf_classifier_model = RandomForestClassifier(n_estimators = 2000,
+	rf_classifier_model = RandomForestClassifier(n_estimators = 1000,
                              oob_score = True,
                              n_jobs = -1,
                              random_state=42,
@@ -79,20 +65,7 @@ def updatePredictions():
 	import pandas as pd
 	global rf_classifier_model
 
-	print "imported pandas"
-
-	initial_data = pd.DataFrame(pd.read_json('https://raw.githubusercontent.com/kkehoe1985/ga_data_science_final_project/master/initialization_data.json'))
-	def unpack(df, column, fillna=None):
-	    ret = None
-	    if fillna is None:
-	        ret = pd.concat([df, pd.DataFrame((d for idx, d in df[column].iteritems()))], axis=1)
-	        del ret[column]
-	    else:
-	        ret = pd.concat([df, pd.DataFrame((d for idx, d in df[column].iteritems())).fillna(fillna)], axis=1)
-	        del ret[column]
-	    return ret
-
-	initial_data = unpack(initial_data, 'properties', 0)
+	initial_data = pd.read_csv('https://raw.githubusercontent.com/kkehoe1985/ga_data_science_final_project/master/unpacked.csv')
 
 	percent_hs_only = float(request.args.get('percent_hs_only'))
 	percent_white_male = float(request.args.get('percent_white_male'))
