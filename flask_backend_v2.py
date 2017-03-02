@@ -90,7 +90,7 @@ def updatePredictions():
 	initial_data["ASIAN_FEMALE_rate"] = initial_data["ASIAN_FEMALE_rate"]*percent_asian_female
 
 
-	drop_columns = ['Democrat', 'Republican', 'state', 'geo_name', 'D', 'R', 'party_winner', 'arcs', 'c', 's', 'r', 'id', 'type']
+	drop_columns = ['Democrat']
 	new_X = initial_data.drop(drop_columns, axis=1)
 	
 
