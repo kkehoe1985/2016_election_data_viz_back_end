@@ -62,25 +62,29 @@ def update_predictions():
 
 	percent_hs_only = float(request.args.get('percent_hs_only'))
 	percent_white_male = float(request.args.get('percent_white_male'))
-	percent_some_college = float(request.args.get('percent_some_college'))
 	percent_bachelors = float(request.args.get('percent_bachelors'))
-	percent_christian_generic = float(request.args.get('percent_christian_generic'))
+	population = float(request.args.get('population'))
 	percent_jewish = float(request.args.get('percent_jewish'))
 	density_pop = float(request.args.get('density_pop'))
 	density_housing = float(request.args.get('density_housing'))
 	percent_white_female = float(request.args.get('percent_white_female'))
-	percent_asian_female = float(request.args.get('percent_asian_female'))
+	percent_black_female = float(request.args.get('percent_black_female'))
+	percent_black_male = float(request.args.get('percent_black_male'))
+
+
+
+
 
 	initial_data["WHITE_MALE_rate"] = initial_data['WHITE_MALE_rate'] * percent_white_male
 	initial_data["Percent of adults with a high school diploma only, 2010-2014"] = initial_data["Percent of adults with a high school diploma only, 2010-2014"] * percent_hs_only
-	initial_data["Percent of adults completing some college or associate's degree, 2010-2014"] = initial_data["Percent of adults completing some college or associate's degree, 2010-2014"] * percent_some_college
 	initial_data["Percent of adults with a bachelor's degree or higher, 2010-2014"] = initial_data["Percent of adults with a bachelor's degree or higher, 2010-2014"] * percent_bachelors
-	initial_data["Christian Generic"] = initial_data["Christian Generic"] * percent_christian_generic
 	initial_data["Jewish"] = initial_data["Jewish"] * percent_jewish
 	initial_data["Density per square mile of land area - Population"] = initial_data["Density per square mile of land area - Population"] * density_pop
 	initial_data["Density per square mile of land area - Housing units"] = initial_data["Density per square mile of land area - Housing units"] * density_housing
 	initial_data["WHITE_FEMALE_rate"] = initial_data["WHITE_FEMALE_rate"] * percent_white_female
-	initial_data["ASIAN_FEMALE_rate"] = initial_data["ASIAN_FEMALE_rate"] * percent_asian_female
+	initial_data["BLACK_FEMALE_rate"] = initial_data["BLACK_FEMALE_rate"] * percent_black_female
+	initial_data["BLACK_MALE_rate"] = initial_data["BLACK_MALE_rate"] * percent_black_male
+	initial_data["Population"] = initial_data["Population"] * population
 
 
 	drop_columns = ['Democrat']
