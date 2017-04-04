@@ -25,30 +25,36 @@ app.after_request(add_cors_headers)
 @app.route('/create_model')
 
 def create_model():
-	from flask import Flask, request
-	import pandas as pd 
-	from sklearn.ensemble import RandomForestClassifier
-	from sklearn.metrics import roc_auc_score
-	import json, urllib
-	from sklearn.ensemble import RandomForestClassifier
+	# from flask import Flask, request
+	# import pandas as pd 
+	# from sklearn.ensemble import RandomForestClassifier
+	# from sklearn.metrics import roc_auc_score
+	# import json, urllib
+	# from sklearn.ensemble import RandomForestClassifier
 
 
-	global rf_classifier_model
-	global X
+	# global rf_classifier_model
+	# global X
     
-	initial_data = pd.read_csv('https://raw.githubusercontent.com/kkehoe1985/ga_data_science_final_project/master/unpacked.csv')
-	X = initial_data.drop('Democrat', axis=1) 
-	y = initial_data['Democrat']
+	# initial_data = pd.read_csv('https://raw.githubusercontent.com/kkehoe1985/ga_data_science_final_project/master/unpacked.csv')
+	# X = initial_data.drop('Democrat', axis=1) 
+	# y = initial_data['Democrat']
 
-	# predict the response for new observations
-	rf_classifier_model = RandomForestClassifier(n_estimators = 1000,
-                             oob_score = True,
-                             n_jobs = -1,
-                             random_state = 42,
-                             max_features = 0.2,
-                             min_samples_leaf = 1)
+	# # predict the response for new observations
+	# rf_classifier_model = RandomForestClassifier(n_estimators = 1000,
+ #                             oob_score = True,
+ #                             n_jobs = -1,
+ #                             random_state = 42,
+ #                             max_features = 0.2,
+ #                             min_samples_leaf = 1)
 
-	rf_classifier_model.fit(X, y)
+	# rf_classifier_model.fit(X, y)
+	import cPickle
+	global rf_classifier_model
+
+	with open('model.py', 'rb') as f:
+		rf_classifier_model = cPickle.load(f)
+
 	return 'model is ready!'
 
 
@@ -56,7 +62,6 @@ def create_model():
 @app.route('/update_predictions')
 def update_predictions():
 	import pandas as pd
-	global rf_classifier_model
 
 	initial_data = pd.read_csv('https://raw.githubusercontent.com/kkehoe1985/ga_data_science_final_project/master/unpacked.csv')
 
